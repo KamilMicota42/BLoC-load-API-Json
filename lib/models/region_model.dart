@@ -10,11 +10,11 @@ class ContinentModel {
     name = json['name'];
     slug = json['slug'];
     if (json['countries'] != null) {
-      countries = <String>[];
+      countries = <CountryModel>[];
       
       json['countries'].forEach((v) {
         
-        countries?.add(CountryModel.fromJson(v).name);
+        countries?.add(CountryModel.fromJson(v));
       });
     }
   }
