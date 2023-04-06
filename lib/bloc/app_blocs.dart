@@ -10,8 +10,8 @@ class RegionBloc extends Bloc<RegionEvent, RegionState> {
     on<LoadRegionEvent>((event, emit) async {
       emit(RegionLoadingState());
       try {
-        final continents = await _regionRepository.getRegion();
-        emit(RegionLoadedState(continents));
+        final regions = await _regionRepository.getRegion();
+        emit(RegionLoadedState(regions));
       } catch (e) {
         emit(RegionErrorState(e.toString()));
       }

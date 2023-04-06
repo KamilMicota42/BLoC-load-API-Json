@@ -11,10 +11,10 @@ class RegionLoadingState extends RegionState {
 }
 
 class RegionLoadedState extends RegionState {
-  final List<ContinentModel> continents;
-  RegionLoadedState(this.continents);
+  final List<ContinentModel> regions;
+  RegionLoadedState(this.regions);
   @override
-  List<Object?> get props => [continents];
+  List<Object?> get props => [regions];
 }
 
 class RegionErrorState extends RegionState {

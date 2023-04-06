@@ -39,9 +39,9 @@ class HomePage extends StatelessWidget {
             return Center(child: Text(state.error));
           }
           if (state is RegionLoadedState) {
-            List<ContinentModel> continents = state.continents;
+            List<ContinentModel> regions = state.regions;
             return ListView.builder(
-                itemCount: continents[0].countries?.length,
+                itemCount: regions[0].countries?.length,
                 itemBuilder: (_, index) {
                   return Padding(
                     padding:
@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
                         color: Theme.of(context).primaryColor,
                         child: ListTile(
                           title: Text(
-                            '${continents[0].countries?[index].name}',
+                            '${regions[0].countries?[index].name}',
                             style: const TextStyle(color: Colors.white),
                           ),
                         )),
