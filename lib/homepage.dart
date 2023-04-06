@@ -4,7 +4,7 @@ import 'package:my_app/bloc/app_blocs.dart';
 import 'package:my_app/bloc/app_states.dart';
 import 'package:my_app/bloc/app_events.dart';
 import 'package:my_app/repo/repository.dart';
-import 'package:my_app/models/user_model.dart';
+import 'package:my_app/models/region_model.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,35 +13,35 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<UserBloc>(
-          create: (BuildContext context) => UserBloc(UserRepository()),
+        BlocProvider<RegionBloc>(
+          create: (BuildContext context) => RegionBloc(RegionRepository()),
         ),
       ],
       child: Scaffold(
-          appBar: AppBar(title: const Text('The BloC App')),
-          body: blocBody()),
+        body: blocBody(),
+      ),
     );
   }
 
-Widget blocBody() {
+  Widget blocBody() {
     return BlocProvider(
-      create: (context) => UserBloc(
-        UserRepository(),
-      )..add(LoadUserEvent()),
-      child: BlocBuilder<UserBloc, UserState>(
+      create: (context) => RegionBloc(
+        RegionRepository(),
+      )..add(LoadRegionEvent()),
+      child: BlocBuilder<RegionBloc, RegionState>(
         builder: (context, state) {
-          if (state is UserLoadingState) {
+          if (state is RegionLoadingState) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
-           if (state is UserErrorState) {
-            return const Center(child:  Text("Error"));
+          if (state is RegionErrorState) {
+            return Center(child: Text(state.error));
           }
-          if (state is UserLoadedState) {
-            List<UserModel> userList = state.users;
+          if (state is RegionLoadedState) {
+            List<ContinentModel> continents = state.continents;
             return ListView.builder(
-                itemCount: userList.length,
+                itemCount: continents.length,
                 itemBuilder: (_, index) {
                   return Padding(
                     padding:
@@ -49,24 +49,14 @@ Widget blocBody() {
                     child: Card(
                         color: Theme.of(context).primaryColor,
                         child: ListTile(
-                            title: Text(
-                              '${userList[index].firstName}  ${userList[index].lastName}',
-                              style: const TextStyle(color: Colors.white),
-                            ),
-
-                            subtitle: Text(
-                              '${userList[index].email}',
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                            
-                            leading: CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  userList[index].avatar.toString()),
-                            ))),
+                          title: Text(
+                            '${continents[index].name}',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        )),
                   );
                 });
           }
-
           return Container();
         },
       ),

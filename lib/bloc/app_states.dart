@@ -1,25 +1,25 @@
-import 'package:my_app/models/user_model.dart';
+import 'package:my_app/models/region_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-abstract class UserState extends Equatable {}
+abstract class RegionState extends Equatable {}
 
-class UserLoadingState extends UserState {
+class RegionLoadingState extends RegionState {
   @override
   List<Object?> get props => [];
 }
 
-class UserLoadedState extends UserState {
-  final List<UserModel> users;
-  UserLoadedState(this.users);
+class RegionLoadedState extends RegionState {
+  final List<ContinentModel> continents;
+  RegionLoadedState(this.continents);
   @override
-  List<Object?> get props => [users];
+  List<Object?> get props => [continents];
 }
 
-class UserErrorState extends UserState {
+class RegionErrorState extends RegionState {
   final String error;
-  UserErrorState(this.error);
+  RegionErrorState(this.error);
   @override
   List<Object?> get props => [error];
 }

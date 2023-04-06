@@ -2,11 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-abstract class UserEvent extends Equatable {
-  const UserEvent();
+abstract class RegionEvent extends Equatable {
+  const RegionEvent();
 }
 
-class LoadUserEvent extends UserEvent {
+class LoadRegionEvent extends RegionEvent {
   @override
   List<Object?> get props => [];
 }
